@@ -16,12 +16,12 @@ def lambda_handler(event, context):
 # Slack Variables
     slack_token = os.environ["slackBot"]
     client = WebClient(token=slack_token)
-    channel_string = "somestringhere"
+    channel_string = "XXXXXXXXXXXXXXXXXXXX"
 
 # Post to slack that the instance is running
-    if eventname == 'Running':
+    if eventname == 'running':
         try:
-          instance = ec2.Instance(ids)
+          instance = ids
           response_string = f"The instance: {instance} has started"
           response = client.chat_postMessage(
             channel= channel_string,
@@ -34,11 +34,11 @@ def lambda_handler(event, context):
 		#Post to slack that instance is shutting down
     elif eventname == 'shutting-down':
     	try:
-	        instance = ec2.Instance(ids)
+	        instance = ids
 	        response_string = f"The instance: {instance} is shutting down"
 	        response = client.chat_postMessage(
 	        	channel= channel_string,
-	        	text="An Instance has started",
+	        	text="An Instance is Shutting Down",
 	        	blocks = [{"type": "section", "text": {"type": "plain_text", "text": response_string}}]
 	        	)
     	except SlackApiError as e:
@@ -46,11 +46,11 @@ def lambda_handler(event, context):
 	      	
     elif eventname == 'stopped':
     	try:
-	        instance = ec2.Instance(ids)
+	        instance = ids
 	        response_string = f"The instance: {instance} has stopped"
 	        response = client.chat_postMessage(
 	        	channel= channel_string,
-	        	text="An Instance has started",
+	        	text="An Instance has stopped",
 	        	blocks = [{"type": "section", "text": {"type": "plain_text", "text": response_string}}]
 	        	)
     	except SlackApiError as e:
@@ -58,11 +58,11 @@ def lambda_handler(event, context):
 	      	
     elif eventname == 'stopping':
     	try:
-	        instance = ec2.Instance(ids)
+	        instance = ids
 	        response_string = f"The instance: {instance} is stopping"
 	        response = client.chat_postMessage(
 	        	channel= channel_string,
-	        	text="An Instance has started",
+	        	text="An Instance is stopping",
 	        	blocks = [{"type": "section", "text": {"type": "plain_text", "text": response_string}}]
 	        	)
     	except SlackApiError as e:
